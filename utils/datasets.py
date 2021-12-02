@@ -295,6 +295,9 @@ class CelebA(DisentangledDataset):
 class Posters(DisentangledDataset):
     img_size = (3, 64, 64)
     background_color = COLOUR_WHITE
+    base_path = '/content/drive/My Drive/Columbia Files'
+    # base_path = 'G:/My Drive/Columbia Files'
+    path = f'{base_path}/Coursework/2021-2022 Fall/Rep Learning/Final Project/'
 
     def __init__(self, root=os.path(f"{path}2_pipeline/Posters"), **kwargs):
         super().__init__(root, [transforms.ToTensor()], **kwargs)
