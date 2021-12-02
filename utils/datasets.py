@@ -296,6 +296,7 @@ class CelebA(DisentangledDataset):
 
 # new dataset class for movie posters
 class Posters(DisentangledDataset):
+    files = {"train": "movie_posters"}
     img_size = (3, 64, 64)
     background_color = COLOUR_WHITE
     
