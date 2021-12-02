@@ -15,10 +15,7 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms, datasets
 
-# DIR = os.path.abspath(os.path.dirname(__file__))
-base_path = '/content/drive/My Drive/Columbia Files'
-# base_path = 'G:/My Drive/Columbia Files'
-DIR = f'{base_path}/Coursework/2021-2022 Fall/Rep Learning/Final Project'
+DIR = os.path.abspath(os.path.dirname(__file__))
 COLOUR_BLACK = 0
 COLOUR_WHITE = 1
 DATASETS_DICT = {"mnist": "MNIST",
@@ -299,7 +296,8 @@ class Posters(DisentangledDataset):
     files = {"train": "movie_posters"}
     img_size = (3, 64, 64)
     background_color = COLOUR_WHITE
-    
+    print(DIR)
+    print(os.path.join(DIR, './2_pipeline/Posters'))
     def __init__(self, root=os.path.join(DIR, './2_pipeline/Posters'), **kwargs):
         super().__init__(root, [transforms.ToTensor()], **kwargs)
 
