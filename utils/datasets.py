@@ -22,7 +22,8 @@ DATASETS_DICT = {"mnist": "MNIST",
                  "fashion": "FashionMNIST",
                  "dsprites": "DSprites",
                  "celeba": "CelebA",
-                 "chairs": "Chairs"}
+                 "chairs": "Chairs",
+                 "posters": "Posters"}
 DATASETS = list(DATASETS_DICT.keys())
 
 
@@ -33,7 +34,7 @@ def get_dataset(dataset):
         # eval because stores name as string in order to put it at top of file
         return eval(DATASETS_DICT[dataset])
     except KeyError:
-        raise ValueError("Unkown dataset: {}".format(dataset))
+        raise ValueError("Unknown dataset: {}".format(dataset))
 
 
 def get_img_size(dataset):
@@ -290,6 +291,42 @@ class CelebA(DisentangledDataset):
         # dataloaders requires so
         return img, 0
 
+# new dataset class for movie posters
+class Posters(DisentangledDataset):
+    img_size = (3, 64, 64)
+    background_color = COLOUR_WHITE
+
+    def __init__(self, root=os.path(f"{path}2_pipeline/Posters"), **kwargs):
+        super().__init__(root, [transforms.ToTensor()], **kwargs)
+
+        self.imgs = glob.glob(self.train_data + '/*')
+    
+    # already downloaded so use placeholder
+    def download(self):
+        return
+
+    def __getitem__(self, idx):
+        """Get the image of `idx`
+
+        Return
+        ------
+        sample : torch.Tensor
+            Tensor in [0.,1.] of shape `img_size`.
+
+        placeholder :
+            Placeholder value as their are no targets.
+        """
+        img_path = self.imgs[idx]
+        # img values already between 0 and 255
+        img = imread(img_path)
+
+        # put each pixel in [0.,1.] and reshape to (C x H x W)
+        img = self.transforms(img)
+
+        # no label so return 0 (note that can't return None because)
+        # dataloaders requires so
+        return img, 0
+    
 
 class Chairs(datasets.ImageFolder):
     """Chairs Dataset from [1].
