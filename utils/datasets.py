@@ -300,10 +300,10 @@ class Posters(DisentangledDataset):
     img_size = (3, 64, 64)
     background_color = COLOUR_WHITE
     
-    def __init__(self, root=os.path.join(DIR, './2_pipeline/Posters'), **kwargs):
+    def __init__(self, root=os.path.join(DIR, './2_pipeline/Posters/Training'), **kwargs):
         super().__init__(root, [transforms.ToTensor()], **kwargs)
 
-        self.imgs = glob.glob(os.path.join(DIR, './2_pipeline/Posters') + '/*')
+        self.imgs = glob.glob(os.path.join(DIR, './2_pipeline/Posters/Training') + '/*')
     
     # already downloaded so use placeholder
     def download(self):
