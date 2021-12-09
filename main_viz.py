@@ -80,6 +80,7 @@ def main(args):
     num_samples = args.n_cols * args.n_rows
     samples = get_samples(dataset, num_samples, idcs=args.idcs)
     # full sample
+    print(dataset)
     full_samples = get_full(dataset, idcs=args.idcs)
 
     if "all" in args.plots:
