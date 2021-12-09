@@ -361,7 +361,6 @@ class Reg_Posters(DisentangledDataset):
         img_path = self.imgs[idx]
         # img values already between 0 and 255
         img = imread(img_path)
-        print(f"Loaded image: {idx}")
 
         # put each pixel in [0.,1.] and reshape to (C x H x W)
         img = self.transforms(img)
