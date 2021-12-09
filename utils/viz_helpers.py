@@ -33,7 +33,7 @@ def get_samples(dataset, num_samples, idcs=[]):
 
     idcs += random.sample(range(len(data_loader.dataset)), num_samples - len(idcs))
     samples = torch.stack([data_loader.dataset[i][0] for i in idcs], dim=0)
-    print("Selected idcs: {}".format(idcs))
+    print("Randomly selected idcs: {}".format(idcs))
 
     return samples
 
@@ -44,6 +44,7 @@ def get_full(dataset, idcs=[]):
                                   shuffle=idcs is None)
     
     samples = torch.stack([data_loader.dataset[i][0] for i in range(len(data_loader.dataset))], dim=0)
+    print("Loaded full dataset.")
     return samples
 
 def sort_list_by_other(to_sort, other, reverse=True):
