@@ -9,7 +9,7 @@ from main import RES_DIR
 from disvae.utils.modelIO import load_model, load_metadata
 
 
-PLOT_TYPES = ['generate-samples', 'data-samples', 'reconstruct', "traversals",
+PLOT_TYPES = ['generate-samples', 'data-samples', 'reconstruct', "post_sample", "traversals",
               'reconstruct-traverse', "gif-traversals", "all"]
 
 
