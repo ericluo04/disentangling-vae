@@ -230,11 +230,10 @@ class Visualizer():
         with torch.no_grad():
             post_mean, post_logvar = self.model.encoder(data.to(self.device))
         # save as pickles
-        print("TEST")
-        print(os.path.join(self.model_dir, "post_mean.p"))
-        pickle.dump(post_mean, os.path.join(self.model_dir, "post_mean.p"), "wb")
-        pickle.dump(post_logvar, os.path.join(self.model_dir, "post_logvar.p"), "wb")
-        pickle.dump(samples, os.path.join(self.model_dir, "samples.p"), "wb")
+        g_path = "/content/drive/My Drive/Columbia Files/Coursework/2021-2022 Fall/Rep Learning/Final Project/"
+        pickle.dump(post_mean, f"{g_path}2_pipeline/post_mean.p", "wb")
+        pickle.dump(post_logvar, f"{g_path}2_pipeline/post_logvar.p", "wb")
+        
         return samples
     
     def traversals(self,
