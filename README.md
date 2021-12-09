@@ -7,5 +7,5 @@ This repository investigates disentangling in VAE:
 * **FactorVAE** from [Disentangling by Factorising](https://arxiv.org/abs/1802.05983)
 * **β-TCVAE** from [Isolating Sources of Disentanglement in Variational Autoencoders](https://arxiv.org/abs/1802.04942)
 
-Forked from [original](https://github.com/YannDubs/disentangling-vae) to train on a custom dataset. 
+Forked from [original](https://github.com/YannDubs/disentangling-vae) to train on a custom dataset and test on a held-out dataset (for regression). 
 
