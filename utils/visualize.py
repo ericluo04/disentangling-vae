@@ -229,8 +229,6 @@ class Visualizer():
     def post_sample(self, data):
         with torch.no_grad():
             post_mean, post_logvar = self.model.encoder(data.to(self.device))
-            samples = self.model.reparameterize(post_mean, post_logvar)
-            samples = samples.cpu().repeat(len(data), 1)
         # save as pickles
         print("TEST")
         print(os.path.join(self.model_dir, "post_mean.p"))
