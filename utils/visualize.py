@@ -232,6 +232,7 @@ class Visualizer():
             samples = self.model.reparameterize(post_mean, post_logvar)
             samples = samples.cpu().repeat(len(data), 1)
         # save as pickles
+        print(os.path.join(self.model_dir, "post_mean.p"))
         pickle.dump(post_mean, os.path.join(self.model_dir, "post_mean.p"), "wb")
         pickle.dump(post_logvar, os.path.join(self.model_dir, "post_logvar.p"), "wb")
         pickle.dump(samples, os.path.join(self.model_dir, "samples.p"), "wb")
