@@ -231,8 +231,8 @@ class Visualizer():
             post_mean, post_logvar = self.model.encoder(data.to(self.device))
         # save as pickles
         g_path = "/content/drive/My Drive/Columbia Files/Coursework/2021-2022 Fall/Rep Learning/Final Project/"
-        pickle.dump(post_mean, f"{g_path}2_pipeline/post_mean.p", "wb")
-        pickle.dump(post_logvar, f"{g_path}2_pipeline/post_logvar.p", "wb")
+        pickle.dump(post_mean, open(f"{g_path}2_pipeline/post_mean.p", "wb"))
+        pickle.dump(post_logvar, open(f"{g_path}2_pipeline/post_logvar.p", "wb"))
         
         return samples
     
