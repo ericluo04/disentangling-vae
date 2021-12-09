@@ -232,9 +232,10 @@ class Visualizer():
             samples = self.model.reparameterize(post_mean, post_logvar)
             samples = samples.cpu().repeat(len(data), 1)
         # save as pickles
-        pickle.dump(post_mean, open(os.path.join(self.model_dir, './2_pipeline/post_mean.p'), "wb"))
-        pickle.dump(post_logvar, open(os.path.join(self.model_dir, './2_pipeline/post_logvar.p'), "wb"))
-        pickle.dump(samples, open(os.path.join(self.model_dir, './2_pipeline/samples.p'), "wb"))
+        g_path = "/content/drive/My Drive/Columbia Files/Coursework/2021-2022 Fall/Rep Learning/Final Project/"
+        pickle.dump(post_mean, open(os.path.join(self.model_dir, f"{g_path}2_pipeline/post_mean.p"), "wb"))
+        pickle.dump(post_logvar, open(os.path.join(self.model_dir, f"{g_path}2_pipeline/post_logvar.p"), "wb"))
+        pickle.dump(samples, open(os.path.join(self.model_dir, f"{g_path}2_pipeline/samples.p"), "wb"))
         return samples
     
     def traversals(self,
