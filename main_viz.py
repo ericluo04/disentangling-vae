@@ -79,9 +79,8 @@ def main(args):
     # same samples for all plots: sample max then take first `x`data  for all plots
     num_samples = args.n_cols * args.n_rows
     samples = get_samples(dataset, num_samples, idcs=args.idcs)
-    # full sample
-    print(dataset)
-    full_samples = get_full(dataset, idcs=args.idcs)
+    # full sample of regression data
+    full_samples = get_full("posters_reg", idcs=args.idcs)
 
     if "all" in args.plots:
         args.plots = [p for p in PLOT_TYPES if p != "all"]
