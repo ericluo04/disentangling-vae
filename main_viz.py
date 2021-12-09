@@ -79,6 +79,8 @@ def main(args):
     # same samples for all plots: sample max then take first `x`data  for all plots
     num_samples = args.n_cols * args.n_rows
     samples = get_samples(dataset, num_samples, idcs=args.idcs)
+    # full sample
+    full_samples = get_full(dataset, idcs=args.idcs)
 
     if "all" in args.plots:
         args.plots = [p for p in PLOT_TYPES if p != "all"]
@@ -90,6 +92,8 @@ def main(args):
             viz.data_samples(samples, size=size)
         elif plot_type == "reconstruct":
             viz.reconstruct(samples, size=size)
+        elif plot_type == "post_sample":
+            viz.post_sample(full_samples)
         elif plot_type == 'traversals':
             viz.traversals(data=samples[0:1, ...] if args.is_posterior else None,
                            n_per_latent=args.n_cols,

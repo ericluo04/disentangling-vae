@@ -37,6 +37,14 @@ def get_samples(dataset, num_samples, idcs=[]):
 
     return samples
 
+# generate full dataset
+def get_full(dataset, idcs=[]):
+    data_loader = get_dataloaders(dataset,
+                                  batch_size=1,
+                                  shuffle=idcs is None)
+    
+    samples = torch.stack([data_loader.dataset[i][0] for i in range(len(data_loader.dataset))], dim=0)
+    return samples
 
 def sort_list_by_other(to_sort, other, reverse=True):
     """Sort a list by an other."""

@@ -26,7 +26,8 @@ DATASETS_DICT = {"mnist": "MNIST",
                  "dsprites": "DSprites",
                  "celeba": "CelebA",
                  "chairs": "Chairs",
-                 "posters": "Posters"}
+                 "posters": "Posters",
+                 "posters_reg": "Reg_Posters"}
 DATASETS = list(DATASETS_DICT.keys())
 
 
@@ -331,7 +332,43 @@ class Posters(DisentangledDataset):
         # dataloaders requires so
         return img, 0
     
+# new dataset class for movie posters (regression data)
+class Reg_Posters(DisentangledDataset):
+    files = {"train": "movie_posters"}
+    img_size = (3, 64, 64)
+    background_color = COLOUR_WHITE
+    
+    def __init__(self, root=os.path.join(DIR, './2_pipeline/Posters/Regression'), **kwargs):
+        super().__init__(root, [transforms.ToTensor()], **kwargs)
 
+        self.imgs = glob.glob(os.path.join(DIR, './2_pipeline/Posters/Regression') + '/*')
+    
+    # already downloaded so use placeholder
+    def download(self):
+        return
+
+    def __getitem__(self, idx):
+        """Get the image of `idx`
+
+        Return
+        ------
+        sample : torch.Tensor
+            Tensor in [0.,1.] of shape `img_size`.
+
+        placeholder :
+            Placeholder value as their are no targets.
+        """
+        img_path = self.imgs[idx]
+        # img values already between 0 and 255
+        img = imread(img_path)
+
+        # put each pixel in [0.,1.] and reshape to (C x H x W)
+        img = self.transforms(img)
+
+        # no label so return 0 (note that can't return None because)
+        # dataloaders requires so
+        return img, 0
+    
 class Chairs(datasets.ImageFolder):
     """Chairs Dataset from [1].
 

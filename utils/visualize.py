@@ -224,7 +224,16 @@ class Visualizer():
         to_plot = torch.cat([originals, recs]) if is_original else recs
         return self._save_or_return(to_plot, size, PLOT_NAMES["reconstruct"],
                                     is_force_return=is_force_return)
-
+    
+    # sample from posterior for a test set 
+    def post_sample(self, data):
+        with torch.no_grad():
+            post_mean, post_logvar = self.model.encoder(data.to(self.device))
+            samples = self.model.reparameterize(post_mean, post_logvar)
+            samples = samples.cpu().repeat(n_samples, 1)
+        print(samples)
+        return samples
+    
     def traversals(self,
                    data=None,
                    is_reorder_latents=False,
