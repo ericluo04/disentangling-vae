@@ -229,8 +229,10 @@ class Visualizer():
     def post_sample(self, data):
         with torch.no_grad():
             post_mean, post_logvar = self.model.encoder(data.to(self.device))
+            print(f"Posterior mean: {post_mean}\n")
+            print(f"Posterior log variance: {post_logvar}\n")
             samples = self.model.reparameterize(post_mean, post_logvar)
-            samples = samples.cpu().repeat(n_samples, 1)
+            samples = samples.cpu().repeat(len(data), 1)
         print(samples)
         return samples
     
