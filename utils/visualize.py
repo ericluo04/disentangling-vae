@@ -229,11 +229,12 @@ class Visualizer():
     def post_sample(self, data):
         with torch.no_grad():
             post_mean, post_logvar = self.model.encoder(data.to(self.device))
-            print(f"Posterior mean: {post_mean}\n")
-            print(f"Posterior log variance: {post_logvar}\n")
             samples = self.model.reparameterize(post_mean, post_logvar)
             samples = samples.cpu().repeat(len(data), 1)
-        print(samples)
+        # save as pickles
+        pickle.dump(post_mean, open(os.path.join(self.model_dir, './2_pipeline/post_mean.p'), "wb"))
+        pickle.dump(post_logvar, open(os.path.join(self.model_dir, './2_pipeline/post_logvar.p'), "wb"))
+        pickle.dump(samples, open(os.path.join(self.model_dir, './2_pipeline/samples.p'), "wb"))
         return samples
     
     def traversals(self,
